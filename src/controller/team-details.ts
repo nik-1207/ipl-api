@@ -16,11 +16,12 @@ interface playerType {
     }
 }
 
-const getTeamDetails = (teamName:string ) => {
-    return  teamDetails.find({id: teamName}, {_id: 0, __v: 0})
+const getTeamDetails = async (teamName:string ) => {
+    const data=await teamDetails.find({id: teamName}, {_id: 0, __v: 0})
         .then((data) => data).catch(() => {
             return Error
         });
+    return data.length>0?data:Error
 }
 const setTeamDetails = async (id: string, team: teamType, players: Array<playerType>) => {
     const document = new teamDetails({

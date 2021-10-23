@@ -8,7 +8,7 @@ teamDetails.get('/:id', async (req: Request, res: Response) => {
         try {
             res.status(200).send(await getTeamDetails(id))
         } catch (err) {
-            res.status(500).send("Internal server Data");
+            res.status(404).send("Page Not Found");
         }
     }
 );
