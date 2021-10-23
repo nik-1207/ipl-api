@@ -1,0 +1,9 @@
+        node_modules
+        build
+        coverage
+        dist
+        logger
+        .env
+# Project exclude paths
+/dist/
+/node_modules/
