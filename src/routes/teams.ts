@@ -1,11 +1,13 @@
 import express, {Request, Response} from 'express';
 import {getAllTeamData, setAllTeamData} from "../controller/teams";
+
 const teams = express.Router();
+
 teams.get('/', async (_: Request, res: Response) => {
     try {
         res.status(200).send(await getAllTeamData())
     } catch (err) {
-        res.status(500).send("Internal server Data");
+        res.status(500).send("Internal server Error");
     }});
 
 teams.post('/', async (req: Request, res: Response) => {
@@ -15,6 +17,5 @@ teams.post('/', async (req: Request, res: Response) => {
     } catch {
         res.status(500).send("Internal server error");
     }
-
 });
 export default teams

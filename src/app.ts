@@ -1,24 +1,18 @@
-import express, {Request, Response} from 'express'
-import morgan from 'morgan'
-import fileSystem from 'fs'
-import path from 'path'
+import express from 'express'
 import swaggerUI from 'swagger-ui-express';
-import teams from './routes/teams';
-import teamDetails from './routes/team-details';
+import {logger} from './logger/logger'
+import Teams from './routes/teams';
+import TeamDetails from './routes/team-details';
+import NotFound from './routes/not-found';
 import specs from './swagger.json'
 
 const app = express();
+
 app.use(express.json());
-app.use(morgan('combined', {
-    stream: fileSystem.createWriteStream(
-        path.join(__dirname, '../logger/access.log'), {flags: 'a'})
-}))
-app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs))
-app.use('/teams', teams)
-app.use('/teams', teamDetails)
-app.use("*", function (_req: Request, res: Response) {
-    res.status(404).send("PAGE NOT FOUND");
-})
+app.use(logger);
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs));
+app.use('/teams', Teams);
+app.use('/teams', TeamDetails);
+app.use("*",NotFound)
 
 export default app;
-module.exports = app;

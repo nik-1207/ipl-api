@@ -4,6 +4,7 @@ interface teamType {
     captainId: string,
     wicketKeeperId: string
 }
+
 interface playerType {
     id: string,
     image: string,
@@ -16,23 +17,19 @@ interface playerType {
     }
 }
 
-const getTeamDetails = async (teamName:string ) => {
-    const data=await teamDetails.find({id: teamName}, {_id: 0, __v: 0})
-        .then((data) => data).catch(() => {
-            return Error
-        });
-    return data.length>0?data:Error
+const getTeamDetails = (teamName: string) => {
+    const data = teamDetails.find({id: teamName}, {_id: 0, __v: 0})
+        .then((data) => data).catch(() => Error);
+    return data.length > 0 ? data : Error;
 }
-const setTeamDetails = async (id: string, team: teamType, players: Array<playerType>) => {
+
+const setTeamDetails = (id: string, team: teamType, players: Array<playerType>) => {
     const document = new teamDetails({
         id: id,
         team: team,
         players: players,
     })
-    try {
-        return await document.save()
-    } catch (err) {
-        return err
-    }
+    return  document.save().then((data)=>data).catch(()=>Error)
+
 }
 export {getTeamDetails, setTeamDetails}

@@ -1,8 +1,8 @@
-import app from './app'
-import config from 'dotenv'
-import mongoose from "mongoose";
+import config from 'dotenv';
+import mongoose from 'mongoose';
+import app from './app';
 
-config.config()
+config.config();
 
 const PORT = process.env.PORT || 3000;
 const url = process.env.db || 'unknown';
@@ -13,5 +13,3 @@ app.listen(process.env.PORT, () => {
         .catch((err) => console.log((err)));
     console.log(`Server is listening on http://localhost:${PORT}`);
 });
-
-
