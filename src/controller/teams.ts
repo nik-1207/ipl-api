@@ -5,13 +5,13 @@ const getAllTeamData = () => {
         .then((data) => data).catch(() => Error);
 }
 
-const setAllTeamData = (id: string, teamName: string, winningYears: Array<number>, venue: string) => {
+const setAllTeamData = async (id: string, teamName: string, winningYears: Array<number>, venue: string) => {
     const teamDocument = new team({
         id: id,
         teamName: teamName,
         winningYears: winningYears,
         venue: venue
     });
-    return teamDocument.save().then((data)=>data).catch(()=>Error);
+    return await teamDocument.save()
 }
 export {getAllTeamData, setAllTeamData}

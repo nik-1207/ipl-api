@@ -18,18 +18,23 @@ interface playerType {
 }
 
 const getTeamDetails = (teamName: string) => {
-    const data = teamDetails.find({id: teamName}, {_id: 0, __v: 0})
-        .then((data) => data).catch(() => Error);
-    return data.length > 0 ? data : Error;
+    return teamDetails.find({id: teamName}, {_id: 0, __v: 0})
+        .then((data) => {
+            if (data.length > 0) {
+                return data
+            } else {
+                return Error
+            }
+        }).catch(() => Error);
 }
 
-const setTeamDetails = (id: string, team: teamType, players: Array<playerType>) => {
+const setTeamDetails = async (id: string, team: teamType, players: Array<playerType>) => {
     const document = new teamDetails({
         id: id,
         team: team,
         players: players,
     })
-    return  document.save().then((data)=>data).catch(()=>Error)
+    return await document.save()
 
 }
 export {getTeamDetails, setTeamDetails}
