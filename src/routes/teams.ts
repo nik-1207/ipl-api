@@ -5,7 +5,7 @@ const teams = express.Router();
 
 teams.get('/', async (_: Request, res: Response) => {
     try {
-        res.status(200).send(await getAllTeamData())
+        res.status(200).send(await getAllTeamData());
     } catch (err) {
         res.status(500).send("Internal server Error");
     }});

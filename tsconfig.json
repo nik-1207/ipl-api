@@ -107,6 +107,6 @@
     /* Skip type checking all .d.ts files. */
   },
   "exclude": [
-    "__test__"
+    "./src/__test__"
   ]
 }

@@ -13,6 +13,6 @@ app.use(logger);
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs));
 app.use('/teams', Teams);
 app.use('/teams', TeamDetails);
-app.use("*",NotFound)
+app.use("*",NotFound);
 
 export default app;
