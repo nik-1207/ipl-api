@@ -18,9 +18,9 @@ interface playerType {
 }
 
 const getTeamDetails = (teamName: string) => {
-    return  teamDetails.find({id:teamName},{__id:0,__v:0})
+    return  teamDetails.findOne({id:teamName},{__id:0,__v:0})
         .then((data)=> {
-            if (data.length > 0){
+            if (data!==null){
                 return data;
             }else{
                 throw new Error('team Id not available');

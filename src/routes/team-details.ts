@@ -8,8 +8,8 @@ teamDetails.get('/:id', async (req: Request, res: Response) => {
     try {
         const data=await getTeamDetails(id)
         res.status(200).send(data);
-    } catch (err) {
-        res.status(404).send(err);
+    } catch (err:any) {
+        res.status(404).send(err.message);
     }
 });
 
@@ -19,8 +19,8 @@ teamDetails.post('/:id', async (req: Request, res: Response) => {
     try {
         const data=await setTeamDetails(id, team, players);
         res.status(201).send(data);
-    } catch(err) {
-        res.status(500).send(err);
+    } catch(err:any) {
+        res.status(500).send(err.message);
     }
 });
 
