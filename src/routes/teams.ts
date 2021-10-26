@@ -5,17 +5,18 @@ const teams = express.Router();
 
 teams.get('/', async (_: Request, res: Response) => {
     try {
-        res.status(200).send(await getAllTeamData());
+        const data=await getAllTeamData();
+        res.status(200).send(data);
     } catch (err) {
-        res.status(500).send("Internal server Error");
+        res.status(500).send(err);
     }});
 
 teams.post('/', async (req: Request, res: Response) => {
     const {id, teamName, winningYears, venue} = req.body;
     try {
         res.status(201).send(await setAllTeamData(id, teamName, winningYears, venue));
-    } catch {
-        res.status(500).send("Internal server error");
+    } catch(err) {
+        res.status(500).send(err);
     }
 });
-export default teams
+export default teams;

@@ -1,7 +1,10 @@
 import mongoose from 'mongoose';
 
 const teamDetails = new mongoose.Schema({
-    id: String,
+    id: {
+        type: String,
+        required:true
+    },
     players: {
         type: Array,
         playerObj: {

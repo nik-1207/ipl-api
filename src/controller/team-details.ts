@@ -18,23 +18,24 @@ interface playerType {
 }
 
 const getTeamDetails = (teamName: string) => {
-    return teamDetails.find({id: teamName}, {_id: 0, __v: 0})
-        .then((data) => {
-            if (data.length > 0) {
-                return data
-            } else {
-                return Error
+    return  teamDetails.find({id:teamName},{__id:0,__v:0})
+        .then((data)=> {
+            if (data.length > 0){
+                return data;
+            }else{
+                throw new Error('team Id not available');
             }
-        }).catch(() => Error);
+        });
 }
 
-const setTeamDetails = async (id: string, team: teamType, players: Array<playerType>) => {
+const setTeamDetails = (id: string, team: teamType, players: Array<playerType>) => {
     const document = new teamDetails({
         id: id,
         team: team,
         players: players,
     })
-    return await document.save()
-
+    return  document.save().then((data:unknown)=>data).catch(()=>{
+        throw new Error("Internal Server Error");
+    });
 }
 export {getTeamDetails, setTeamDetails}
