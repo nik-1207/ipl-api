@@ -9,7 +9,7 @@ import specs from './swagger.json'
 const app = express();
 
 app.use(express.json());
-app.use(logger);
+// app.use(logger);
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs));
 app.use('/teams', Teams);
 app.use('/teams', TeamDetails);

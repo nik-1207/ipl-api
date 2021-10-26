@@ -2,9 +2,7 @@ import team from "../models/teams";
 
 const getAllTeamData = () => {
     return team.find({}, {_id: 0, __v: 0})
-        .then((data) => data).catch(() => {
-            throw new Error("Internal Server Error")
-        });
+        .then((data) => data)
 }
 
 const setAllTeamData = (id: string, teamName: string, winningYears: Array<number>, venue: string) => {
@@ -14,8 +12,6 @@ const setAllTeamData = (id: string, teamName: string, winningYears: Array<number
         winningYears: winningYears,
         venue: venue
     });
-    return  teamDocument.save().then((data:unknown)=>data).catch(()=>{
-        throw new Error("Internal Server Error");
-    });
+    return  teamDocument.save().then((data:unknown)=>data)
 }
 export {getAllTeamData, setAllTeamData}

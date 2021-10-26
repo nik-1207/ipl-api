@@ -29,14 +29,6 @@ describe('read and write team-details in database',()=>{
         expect(data).toBe(mockTeamData);
        mockTeamDetails.reset('save');
    });
-    it('should throw Error if some error occured in save ',()=>{
-        mockTeamDetails.toReturn(new Error('Internal server error'),
-            'save');
-        expect(setTeamDetails(mockTeamData.id,
-            mockTeamData.team,mockTeamData.players))
-            .rejects.toThrowError('err in saving document');
-        mockTeamDetails.reset('save');
-    });
    it('should get team details for a given team', async ()=>{
         mockTeamDetails.toReturn(mockTeamData,'findOne');
         const data=await getTeamDetails('test-team');

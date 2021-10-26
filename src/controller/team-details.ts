@@ -34,8 +34,6 @@ const setTeamDetails = (id: string, team: teamType, players: Array<playerType>) 
         team: team,
         players: players,
     })
-    return  document.save().then((data:unknown)=>data).catch(()=>{
-        throw new Error("Internal Server Error");
-    });
+    return  document.save().then((data:unknown)=>data);
 }
 export {getTeamDetails, setTeamDetails}

@@ -4,19 +4,21 @@ import {getAllTeamData, setAllTeamData} from "../controller/teams";
 const teams = express.Router();
 
 teams.get('/', async (_: Request, res: Response) => {
+
     try {
         const data=await getAllTeamData();
-        res.status(200).send(data);
-    } catch (err) {
-        res.status(500).send(err);
+        res.status(200).send({data:data});
+    } catch (err:any) {
+        res.status(500).send(err.message);
     }});
 
 teams.post('/', async (req: Request, res: Response) => {
     const {id, teamName, winningYears, venue} = req.body;
     try {
-        res.status(201).send(await setAllTeamData(id, teamName, winningYears, venue));
-    } catch(err) {
-        res.status(500).send(err);
+        const data=await setAllTeamData(id, teamName, winningYears, venue)
+        res.status(201).send({data:data});
+    } catch(err:any) {
+        res.status(500).send(err.message);
     }
 });
 export default teams;
