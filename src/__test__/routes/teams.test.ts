@@ -1,13 +1,21 @@
 import app from '../../app';
 import request from 'supertest';
 
+const mockTeamData = {
+    id: 'test',
+    teamName: 'test',
+    winningYears: [0, 1, 2, 3],
+    venue: 'test'
+}
 jest.mock('../../controller/teams', () => {
     return {
         getAllTeamData: () => {
-            return Promise.resolve("hello")
+            return Promise.resolve("FROM GET ALL TEAM DATA")
         },
         setAllTeamData: (id: string, teamName: string, winningYears: Array<number>, venue: string) => {
-            return Promise.resolve("hello")
+            return Promise.resolve({
+                id, teamName, winningYears, venue
+            });
         }
     }
 });
@@ -15,16 +23,24 @@ jest.mock('../../controller/teams', () => {
 describe('/teams', () => {
     it('GET /teams', async () => {
         await request(app).get('/teams').then(res => {
-            expect(res.status).toStrictEqual(200)
-            expect(res.body.data).toBe("hello");
+            expect(res.status).toStrictEqual(200);
+            expect(res.body.data).toBe("FROM GET ALL TEAM DATA");
         });
     });
     it('POST /teams', async () => {
-        await request(app).post('/teams').send({data: 'test data'})
-            .then((res) => {
-                expect(res.status).toStrictEqual(201)
-                expect(res.body.data).toBe("hello");
-            })
+        await request(app).post('/teams').send({
+            id: 'test',
+            teamName: 'test',
+            winningYears: [0, 1, 2, 3],
+            venue: 'test'
+        }).then((res) => {
+                expect(res.status).toStrictEqual(201);
+                expect(res.body.data).toEqual({
+                    id: 'test',
+                    teamName: 'test',
+                    winningYears: [0, 1, 2, 3],
+                    venue: 'test'
+                });
+            });
     });
-
 });
