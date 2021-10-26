@@ -7,7 +7,7 @@ teamDetails.get('/:id', async (req: Request, res: Response) => {
     const {id} = req.params;
     try {
         const data=await getTeamDetails(id)
-        res.status(200).send(data);
+        res.status(200).send({data});
     } catch (err:any) {
         res.status(404).send(err.message);
     }
@@ -18,7 +18,7 @@ teamDetails.post('/:id', async (req: Request, res: Response) => {
     const {team, players} = req.body;
     try {
         const data=await setTeamDetails(id, team, players);
-        res.status(201).send(data);
+        res.status(201).send({data});
     } catch(err:any) {
         res.status(500).send(err.message);
     }

@@ -12,15 +12,15 @@ jest.mock('../../controller/team-details', () => {
     }
 });
 
-describe('/teams', () => {
+describe('/teams:id', () => {
     it('GET /teams', async () => {
-        await request(app).get('/teams').then(res => {
+        await request(app).get('/teams/test-team').then(res => {
             expect(res.status).toStrictEqual(200)
             expect(res.body.data).toBe("hello");
         });
     });
     it('POST /teams', async () => {
-        await request(app).post('/teams').send({data: 'test data'})
+        await request(app).post('/teams/test-team').send({data: 'test data'})
             .then((res) => {
                 expect(res.status).toStrictEqual(201)
                 expect(res.body.data).toBe("hello");
