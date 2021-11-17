@@ -1,6 +1,7 @@
 {
   "openapi": "3.0.1",
   "info": {
+    
     "title": "IPL Website",
     "description": "All Teams and Players Data API",
     "version": "0.1"
